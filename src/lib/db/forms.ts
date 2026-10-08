@@ -1,4 +1,5 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
+import { getDevice} from '@/lib/device';
 import { uid } from '@/lib/utils';
 import {
   toForm,
@@ -146,7 +147,7 @@ export async function createForm(
   );
   return toForm(row);
 }
-
+git 
 export async function updateForm(
   db: Client,
   id: string,
@@ -280,6 +281,7 @@ export async function addResponse(
       respondent_name: input.respondentName,
       respondent_email: input.respondentEmail,
       answers: input.answers,
+      device_id:getDeviceid(),
     });
     return error;
   };

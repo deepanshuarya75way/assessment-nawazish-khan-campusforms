@@ -38,6 +38,7 @@ export type ResponseRow = {
   status: ResponseStatus;
   public_note: string;
   submitted_at: string;
+  device_id?:string | null ;
 };
 
 /**
