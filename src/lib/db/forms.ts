@@ -289,6 +289,9 @@ export async function addResponse(
   const first = input.ref ?? newResponseRef();
   const error = await write(first);
   if (!error) return first;
+  if (error.message.includes('responses_one_per_device')){
+    throw new Error('You have already submitted this form from this device');
+  }
   // Unique `ref` collision is vanishingly rare; retry once, then surface.
   // Don't retry when the caller already bound photos to `ref`.
   if (error.code === '23505' && !input.ref) {
