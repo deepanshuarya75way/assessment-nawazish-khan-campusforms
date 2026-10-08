@@ -147,6 +147,15 @@ Built by [Nawazish Khan](https://github.com/nawazish2).
 
 
 ## Duplicate submission prevention 
-- Random device ID in local storage  (no personal data ), sent with each submission .
-- unique index on (form_id , device_id) blocks repeats on server side .
-- Max limits enforced by existing max_responses trigger. 
+**problem** Public users could submit the same form multiple times from one device.
+
+**solution** 
+- 'src/lib/device.ts' : each browser gets a random ID (UUID()) . saved in local storage . 
+no personal data . no fingerprinting
+- 'src/lib/dn/forms.ts' : the device id is sent with every submission 
+- 'supabase/migrations/20261008120000_device_dedupe.sql': a unique index on (form_id, device_id).
+rejects the same submission from the same device , enforced in the database (server side).
+- max limit : the existing 'max_responses; checks in the 'guard_response' trigger blocks new submissions once the limit is reaxhed 
+  
+  **testing** : 'npx vitest run src/lib/device.test.ts'
+  
