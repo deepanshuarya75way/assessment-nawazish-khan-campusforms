@@ -144,3 +144,9 @@ know where they stop.
 ---
 
 Built by [Nawazish Khan](https://github.com/nawazish2).
+
+
+## Duplicate submission prevention 
+- Random device ID in local storage  (no personal data ), sent with each submission .
+- unique index on (form_id , device_id) blocks repeats on server side .
+- Max limits enforced by existing max_responses trigger. 
